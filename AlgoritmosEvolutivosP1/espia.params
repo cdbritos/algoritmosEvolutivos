@@ -21,7 +21,7 @@ stat =					ec.simple.SimpleStatistics
 breed = 				ec.simple.SimpleBreeder
 
 # CANTIDAD DE GENERACIONES
-generations =				100
+generations =				150
 
 # PARAR SI ENCUENTRA LA SOLUCION OPTIMA
 quit-on-run-complete =				true
