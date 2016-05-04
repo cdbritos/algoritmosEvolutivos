@@ -37,7 +37,6 @@ public class Espia extends Problem implements SimpleProblemForm{
     private int [][] mCostos; 
     private File in;
     
-    private int inicioMision;
     private int cantDestinos;
     private int diaInicioMediaTemporada;
     private double aumentoMediaTemporada;
@@ -50,7 +49,6 @@ public class Espia extends Problem implements SimpleProblemForm{
         super.setup(state, base); //To change body of generated methods, choose Tools | Templates.
         
         //cargo parametros del problema
-        this.inicioMision = state.parameters.getInt(base.push(P_INICIO_MISION),null);
         this.diaInicioMediaTemporada = state.parameters.getInt(base.push(P_DIA_INICIO_MEDIA_TEMPORADA),null);
         this.aumentoMediaTemporada = 1 +  state.parameters.getDouble(base.push(P_AUMENTO_MEDIA_TEMPORADA),null)/100;
         this.diaInicioAltaTemporada = state.parameters.getInt(base.push(P_DIA_INICIO_ALTA_TEMPORADA),null);
@@ -105,43 +103,15 @@ public class Espia extends Problem implements SimpleProblemForm{
     	IntegerVectorIndividual ind2 = (IntegerVectorIndividual)ind;
 
     	double valor = 0; //Calcular el fitness del individuo
-    	if (esSolucion(ind2)){
-    		for (int i=1; i < ind2.genome.length; i++){
+    	for (int i=1; i < ind2.genome.length; i++){
     			valor+=((mCostos[ind2.genome[i-1]][ind2.genome[i]]) * aumentoPorTemporada(i));
-    		}
-    	}else{
-    		valor = Double.MAX_VALUE;
     	}
-   
+    	
     	((SimpleFitness) ind2.fitness).setFitness(state, valor*(-1), valor==0);
 
     	ind2.evaluated=true;
     
     }
-            
-    
-    private boolean esSolucion(IntegerVectorIndividual ind) {  	
-    	return inicioMisionOK(ind) && !existeDestinoRepetido(ind);  	
-    }
-
-	private boolean inicioMisionOK(IntegerVectorIndividual ind) {
-		return ind.genome[0] == this.inicioMision;
-	}
-
-	private boolean existeDestinoRepetido(IntegerVectorIndividual ind) {
-		boolean[] visitados = new boolean[ind.genome.length];
-		boolean repetido = false;
-		for (int i = 0; !repetido && i < ind.genomeLength(); i++){
-			if (visitados[ind.genome[i]])
-				repetido = true;
-			else
-				visitados[ind.genome[i]] = true;
-		}
-			
-		return repetido;
-	}
-
-
 
 	public double aumentoPorTemporada(int j){
     	int  diaMision = j * this.diasEstadia;

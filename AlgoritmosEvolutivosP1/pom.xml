@@ -4,12 +4,12 @@
   <artifactId>AlgoritmosEvolutivosP1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>algoritmos evolutivos P1</name>
-  <dependencies>
+  <!-- <dependencies>
 	<dependency>
 		<groupId>org.uncommons.watchmaker</groupId>
 		<artifactId>watchmaker-framework</artifactId>
 		<version>0.7.0</version>
 	</dependency>
   </dependencies>
-  
+  -->
 </project>

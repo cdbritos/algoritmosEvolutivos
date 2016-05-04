@@ -2,8 +2,8 @@
 # Licensed under the Academic Free License version 3.0
 # See the file "LICENSE" for more information
 
-#parent.0 = /home/cdbritos/cursoAE/ecj/ec/simple/simple.params
-parent.0 = /home/cbritos/Escritorio/ae/ecj/ec/simple/simple.params
+parent.0 = /home/cdbritos/cursoAE/ecj/ec/simple/simple.params
+#parent.0 = /home/cbritos/Escritorio/ae/ecj/ec/simple/simple.params
 
 # EN ESTA CLASE SE ENCUENTRA LA FUNCION DE FITNESS EN EL METODO EVALUATE
 eval.problem = espia.Espia
@@ -28,13 +28,13 @@ eval.problem.diasEstadia=5
 # eval.problem.out = MonaLisaOut.png
 
 # ESTOS VIENEN POR DEFECTO
-state = 				ec.simple.SimpleEvolutionState
-init = 					ec.simple.SimpleInitializer
-finish = 	        	ec.simple.SimpleFinisher
-exch = 					ec.simple.SimpleExchanger
-eval =					ec.simple.SimpleEvaluator
+#state = 				ec.simple.SimpleEvolutionState
+#init = 					ec.simple.SimpleInitializer
+#finish = 	        	ec.simple.SimpleFinisher
+#exch = 					ec.simple.SimpleExchanger
+#eval =					ec.simple.SimpleEvaluator
 stat =					espia.EspiaStatics
-breed = 				ec.simple.SimpleBreeder
+#breed = 				ec.simple.SimpleBreeder
 
 # CANTIDAD DE GENERACIONES
 generations =				10000
@@ -78,7 +78,9 @@ pop.subpop.0.species.crossover-type = one
 pop.subpop.0.species.crossover-prob =0.75
 
 # el tipo de vector a utilizar y los maximos y minimos que puede tener
-pop.subpop.0.species.ind =		ec.vector.IntegerVectorIndividual
+pop.subpop.0.species.ind =		espia.IntegerVectorIndividualEspia
+pop.subpop.0.species.min-gene.0 =	0
+pop.subpop.0.species.max-gene.0 =	0
 pop.subpop.0.species.min-gene =	0
 pop.subpop.0.species.max-gene =	9
 
