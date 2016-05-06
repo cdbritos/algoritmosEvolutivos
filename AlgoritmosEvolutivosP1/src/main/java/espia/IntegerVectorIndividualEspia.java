@@ -20,7 +20,7 @@ import java.util.Random;
  */
 public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
 
-    ArrayList numeros= new ArrayList<Integer>();
+    ArrayList<Integer> numeros= new ArrayList<Integer>();
     int res;
     Random rnd=new Random();
     //int[] genome1=new int[5];
@@ -110,10 +110,11 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
         HashMap mapeoGen=new HashMap(cantMapeo);
         HashMap mapeoInd=new HashMap(cantMapeo);
 
-        /*System.out.println("*************IND INICIAL-"+inicio+"-"+fin+"-pIni-pFin"+ind2.genome[0]+"-"+ind2.genome[1]+"-"+ind2.genome[2]+"-"+ind2.genome[3]+"-"+ind2.genome[4]);
-
-        System.out.println("*************GENOME INICIAL-"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);*/
-
+	//        System.out.println("*************IND INICIAL-"+inicio+"-"+fin+"-pIni-pFin"+ind2.genome[0]+"-"+ind2.genome[1]+"-"+ind2.genome[2]+"-"+ind2.genome[3]+"-"+ind2.genome[4]);
+	//
+	//        System.out.println("*************GENOME INICIAL-"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
+        System.out.println(ind.genotypeToStringForHumans());
+        
         for(int x=point0*s.chunksize;x<point*s.chunksize;x++)
             {
             mapeoGen.put(ind2.genome[x],genome[x]);
@@ -155,9 +156,10 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
             contador++;
         }
             
-            /*System.out.println("*************IND-FINAL"+ind2.genome[0]+"-"+ind2.genome[1]+"-"+ind2.genome[2]+"-"+ind2.genome[3]+"-"+ind2.genome[4]);
-            
-            System.out.println("*************GENOME-FINAL"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);*/
+//            System.out.println("*************IND-FINAL"+ind2.genome[0]+"-"+ind2.genome[1]+"-"+ind2.genome[2]+"-"+ind2.genome[3]+"-"+ind2.genome[4]);
+//            
+//            System.out.println("*************GENOME-FINAL"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
+        System.out.println(ind2.genotypeToStringForHumans());
     }
         
 

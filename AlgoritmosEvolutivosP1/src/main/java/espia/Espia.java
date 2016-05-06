@@ -162,8 +162,11 @@ public class Espia extends Problem implements SimpleProblemForm{
         return balance;
     }
     
-    /*public static void main(String[] args) {
-        // TODO code application logic here
-    }*/
+    @Override
+    public void describe(EvolutionState state, Individual ind,
+    		int subpopulation, int threadnum, int log) {
+    	// TODO Auto-generated method stub
+    	ind.printIndividualForHumans(state, log);
+    }
     
 }
