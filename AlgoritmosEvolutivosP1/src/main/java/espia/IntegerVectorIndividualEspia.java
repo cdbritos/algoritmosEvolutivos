@@ -113,7 +113,7 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
 	//        System.out.println("*************IND INICIAL-"+inicio+"-"+fin+"-pIni-pFin"+ind2.genome[0]+"-"+ind2.genome[1]+"-"+ind2.genome[2]+"-"+ind2.genome[3]+"-"+ind2.genome[4]);
 	//
 	//        System.out.println("*************GENOME INICIAL-"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
-        System.out.println(ind.genotypeToStringForHumans());
+//        System.out.println(this.genotypeToStringForHumans());
         
         for(int x=point0*s.chunksize;x<point*s.chunksize;x++)
             {
@@ -159,9 +159,10 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
 //            System.out.println("*************IND-FINAL"+ind2.genome[0]+"-"+ind2.genome[1]+"-"+ind2.genome[2]+"-"+ind2.genome[3]+"-"+ind2.genome[4]);
 //            
 //            System.out.println("*************GENOME-FINAL"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
-        System.out.println(ind2.genotypeToStringForHumans());
+//        System.out.println(ind2.genotypeToStringForHumans());
     }
-        
+    
+
 
     
     

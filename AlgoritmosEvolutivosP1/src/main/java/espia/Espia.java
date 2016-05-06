@@ -166,7 +166,7 @@ public class Espia extends Problem implements SimpleProblemForm{
     public void describe(EvolutionState state, Individual ind,
     		int subpopulation, int threadnum, int log) {
     	// TODO Auto-generated method stub
-    	ind.printIndividualForHumans(state, log);
+    	state.output.println( ind.genotypeToStringForHumans(), log );
     }
     
 }
