@@ -6,6 +6,7 @@
 package espia;
 
 import ec.EvolutionState;
+import ec.Species;
 import ec.vector.IntegerVectorIndividual;
 import ec.vector.IntegerVectorSpecies;
 import ec.vector.VectorIndividual;
@@ -22,28 +23,30 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
     ArrayList numeros= new ArrayList<Integer>();
     int res;
     Random rnd=new Random();
-    int[] genome1=new int[10];
+    //int[] genome1=new int[5];
     
    @Override
     public void reset(EvolutionState state, int thread) {
         //super.reset(state, thread); //To change body of generated methods, choose Tools | Templates.
         
-        for(int i=0;i<9;i++){
+        for(int i=0;i<(genome.length-1);i++){
                 numeros.add(i, i+1);
         }
         
-        genome1[0]=0;
+        //int[] genome1=new int[genome.length];
+        genome[0]=0;
         int k=numeros.size();
         int n=k;
         for(int i=1;i<=k;i++){
             res=rnd.nextInt(n);            
-            genome1[i]=(Integer)numeros.get(res);
+            genome[i]=(Integer)numeros.get(res);
             numeros.remove(res);
             n--;
         }
-        genome=genome1;
+        //genome=genome1;
     
-        System.out.println("*********************PROBANDO-"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
+        //System.out.println("PROBANDO-"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
+        
     }
 
     @Override
@@ -71,7 +74,8 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
                     genome[pos1]=aux;
                 }
         }
-        //System.out.println("*************GENOME MUTATION-"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]); 
+        //System.out.println("*************GENOME MUTATION-"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
+    
     }
 
     @Override
