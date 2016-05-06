@@ -10,6 +10,12 @@ parent.0 = C:/Users/Gonzalo/Desktop/FACULTAD/AE/ecj/ec/simple/simple.params
 # N ESTA CLASE SE ENCUENTRA LA FUNCION DE FITNESS EN EL METODO EVALUATE
 eval.problem = espia.Espia
 
+stat.file				$solucion.out
+stat.do-final=			true
+stat.do-generation=		false
+stat.do-message=		false
+stat.do-description=	true
+
 # ARCHIVOS DE ENTRADA Y SALIDA DEL PROGRAMA
 eval.problem.in_matriz = espia_matriz
 eval.problem.in_temporadas = espia_temporadas
@@ -21,11 +27,11 @@ init = 					ec.simple.SimpleInitializer
 finish = 	        	ec.simple.SimpleFinisher
 exch = 					ec.simple.SimpleExchanger
 eval =					ec.simple.SimpleEvaluator
-stat =					ec.simple.SimpleStatistics
+stat =					espia.EspiaStatics
 breed = 				ec.simple.SimpleBreeder
 
 # CANTIDAD DE GENERACIONES
-generations =				10000
+generations =				100
 
 # PARAR SI ENCUENTRA LA SOLUCION OPTIMA
 quit-on-run-complete =				true
@@ -58,7 +64,7 @@ pop.subpop.0.species.fitness =		ec.simple.SimpleFitness
 
 # tipo de cruzamiento y la probabilidad
 #pop.subpop.0.species.crossover-type = one
-pop.subpop.0.species.crossover-prob =	0.75
+pop.subpop.0.species.crossover-prob =	1
 
 # el tipo de vector a utilizar y los maximos y minimos que puede tener
 pop.subpop.0.species.ind =		espia.IntegerVectorIndividualEspia
