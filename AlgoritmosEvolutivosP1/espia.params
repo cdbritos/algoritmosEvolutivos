@@ -3,8 +3,8 @@
 # See the file "LICENSE" for more information
 
 #parent.0 = /home/cdbritos/cursoAE/ecj/ec/simple/simple.params
-parent.0 = /home/cbritos/Escritorio/ae/ecj/ec/simple/simple.params
-#parent.0 = ../../simple/simple.params
+#parent.0 = /home/cbritos/Escritorio/ae/ecj/ec/simple/simple.params
+parent.0 = C:/Users/Gonzalo/Desktop/FACULTAD/AE/ecj/ec/simple/simple.params
 
 # N ESTA CLASE SE ENCUENTRA LA FUNCION DE FITNESS EN EL METODO EVALUATE
 eval.problem = espia.Espia
