@@ -44,8 +44,9 @@ public class Espia extends Problem implements SimpleProblemForm{
     
     @Override
     public void setup(EvolutionState state, Parameter base) {
-        Parameter def = defaultBase();  
+  
         super.setup(state, base); //To change body of generated methods, choose Tools | Templates.
+
         in_matriz = state.parameters.getFile(base.push(MATRIZ_IN), null);
         in_temporadas = state.parameters.getFile(base.push(TEMPORADAS_IN), null);
         
@@ -71,7 +72,7 @@ public class Espia extends Problem implements SimpleProblemForm{
                 }
             base.param="pop.subpop.0.species";
             state.parameters.set(base.push(P_GENOMESIZE), String.valueOf(fila));
-            state.parameters.set(base.push("min-gene"), "1");
+            state.parameters.set(base.push("min-gene"), "0");
             state.parameters.set(base.push("max-gene"), String.valueOf(fila-1));
             /*mCostos=new int[fila][fila];
             for (int j=0;j<fila;j++){

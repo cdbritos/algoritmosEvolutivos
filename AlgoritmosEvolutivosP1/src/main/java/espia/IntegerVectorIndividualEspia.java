@@ -10,6 +10,8 @@ import ec.Species;
 import ec.vector.IntegerVectorIndividual;
 import ec.vector.IntegerVectorSpecies;
 import ec.vector.VectorIndividual;
+import ec.vector.VectorSpecies;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -20,69 +22,57 @@ import java.util.Random;
  */
 public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
 
-    ArrayList<Integer> numeros= new ArrayList<Integer>();
-    int res;
-    Random rnd=new Random();
-    //int[] genome1=new int[5];
+    
     
    @Override
     public void reset(EvolutionState state, int thread) {
-        //super.reset(state, thread); //To change body of generated methods, choose Tools | Templates.
-        
-        for(int i=0;i<(genome.length-1);i++){
-                numeros.add(i, i+1);
+	   	
+	   	ArrayList<Integer> numeros= new ArrayList<Integer>();
+	    int res;
+	    // agrego a lista los numeros que contendra el genome - siempre empieza en 0
+	    // numeros = 1..genome.length-1
+        for(int i=1;i < genome.length;i++){
+                numeros.add(i);
         }
         
-        //int[] genome1=new int[genome.length];
         genome[0]=0;
+        // crea genoma de forma que no haya repetidos
         int k=numeros.size();
         int n=k;
         for(int i=1;i<=k;i++){
-            res=rnd.nextInt(n);            
+            res = state.random[thread].nextInt(n);            
             genome[i]=(Integer)numeros.get(res);
             numeros.remove(res);
             n--;
         }
-        //genome=genome1;
-    
-        //System.out.println("PROBANDO-"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
         
     }
 
     @Override
     public void defaultMutate(EvolutionState state, int thread) {
-        //super.defaultMutate(state, thread); //To change body of generated methods, choose Tools | Templates.
         
         // Aplico EM - Exchange Mutation
-        int n=(genome.length);
         IntegerVectorSpecies s = (IntegerVectorSpecies) species;
 
-        int pos1=rnd.nextInt(n);
-        while (pos1==0){
-            pos1=rnd.nextInt(n);
-        }
-        int pos2=rnd.nextInt(n);
-        while ((pos2==pos1) || (pos2==0)){
-            pos2=rnd.nextInt(n);
-        }
-        int aux;
+        int aux, pos;
+       
         for(int x = 1; x < genome.length; x++){
+        	//sorteo una posicion con la que mutar
             if (state.random[thread].nextBoolean(s.mutationProbability(x)))
-                {
-                    aux=genome[pos2];
-                    genome[pos2]=genome[pos1];
-                    genome[pos1]=aux;
+                { 	
+            			pos = randomValueFromClosedInterval(1, genome.length-1, state.random[thread]);
+            			aux = genome[x]; 
+            			genome[x] = genome[pos];
+            			genome[pos]= aux ;
                 }
         }
-        //System.out.println("*************GENOME MUTATION-"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
     
     }
 
     @Override
     public void defaultCrossover(EvolutionState state, int thread, VectorIndividual ind) {
-        //super.defaultCrossover(state, thread, ind); //To change body of generated methods, choose Tools | Templates.
-        
-        // Aplico cruzamiento Partially Mapped Crossover (PMX)
+
+    	// Aplico cruzamiento Partially Mapped Crossover (PMX)
         IntegerVectorSpecies s = (IntegerVectorSpecies) species;
         IntegerVectorIndividual ind2=(IntegerVectorIndividual) ind;
         int tmp;
@@ -93,6 +83,7 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
         if (len != genome.length || len != ind2.genome.length)
             state.output.warnOnce("Genome lengths are not the same.  Vector crossover will only be done in overlapping region.");
         
+        //Elijo puntos de corte
         point = state.random[thread].nextInt((len / s.chunksize));
         while (point==0){
             point = state.random[thread].nextInt((len / s.chunksize));
@@ -107,32 +98,32 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
         int inicio=point0*s.chunksize;
         int fin=point*s.chunksize;
         int cantMapeo=fin-inicio;
-        HashMap mapeoGen=new HashMap(cantMapeo);
-        HashMap mapeoInd=new HashMap(cantMapeo);
-
-	//        System.out.println("*************IND INICIAL-"+inicio+"-"+fin+"-pIni-pFin"+ind2.genome[0]+"-"+ind2.genome[1]+"-"+ind2.genome[2]+"-"+ind2.genome[3]+"-"+ind2.genome[4]);
-	//
-	//        System.out.println("*************GENOME INICIAL-"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
-        //System.out.println(this.genotypeToStringForHumans());
-//        System.out.println(this.genotypeToStringForHumans());
         
-        for(int x=point0*s.chunksize;x<point*s.chunksize;x++)
-            {
+        //creo hashmap para guardar mapeos del largo de la seccion de corte
+        HashMap<Integer,Integer> mapeoGen= new HashMap<Integer,Integer>(cantMapeo);
+        HashMap<Integer,Integer> mapeoInd=new HashMap<Integer,Integer>(cantMapeo);
+        
+        //hago el crossover para la seccion y guardo los mapeos para aplicar despues
+        for(int x=point0*s.chunksize;x<point*s.chunksize;x++){
             mapeoGen.put(ind2.genome[x],genome[x]);
             mapeoInd.put(genome[x], ind2.genome[x]);
             
             tmp = ind2.genome[x];
             ind2.genome[x] = genome[x];
             genome[x] = tmp;
-            }
+        }
+        
         int cantGen=genome.length;
         int i=1;
+        //aplico mapeo a this desde 1 a inicio seccion
         while (i<inicio) {
             while (mapeoGen.containsKey(genome[i])){
                 genome[i]=(int) mapeoGen.get(genome[i]);
             }
             i++;
         }
+
+        //aplico mapeo a this desde fin seccion al fin del genoma
         int contador=fin;
         while (contador<cantGen) {
             while (mapeoGen.containsKey(genome[contador])){
@@ -140,7 +131,7 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
             }
             contador++;
         }
-
+        //aplico mapeo a ind desde 1 a inicio seccion
         i=1;
         while (i<inicio) {
             while (mapeoInd.containsKey(ind2.genome[i])){
@@ -148,6 +139,7 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
             }
             i++;
         }
+        //aplico mapeo a ind desde fin seccion al fin del genoma
         contador=fin;
         cantGen=ind2.genome.length;
         while (contador<cantGen) {
@@ -157,15 +149,6 @@ public class IntegerVectorIndividualEspia extends IntegerVectorIndividual{
             contador++;
         }
             
-//            System.out.println("*************IND-FINAL"+ind2.genome[0]+"-"+ind2.genome[1]+"-"+ind2.genome[2]+"-"+ind2.genome[3]+"-"+ind2.genome[4]);
-//            
-//            System.out.println("*************GENOME-FINAL"+genome[0]+"-"+genome[1]+"-"+genome[2]+"-"+genome[3]+"-"+genome[4]);
-       // System.out.println(ind2.genotypeToStringForHumans());
-//        System.out.println(ind2.genotypeToStringForHumans());
     }
-    
-
-
-    
     
 }
