@@ -17,10 +17,10 @@ stat.do-message=		false
 stat.do-description=	true
 
 # ARCHIVOS DE ENTRADA Y SALIDA DEL PROGRAMA
-#eval.problem.in_matriz = espia_matriz
-#eval.problem.in_temporadas = espia_temporadas
-eval.problem.in_matriz = problema_matriz
-eval.problem.in_temporadas = problema_temporadas
+eval.problem.in_matriz = espia_matriz
+eval.problem.in_temporadas = espia_temporadas
+#eval.problem.in_matriz = problema_matriz
+#eval.problem.in_temporadas = problema_temporadas
 
 
 # ESTOS VIENEN POR DEFECTO
@@ -55,9 +55,9 @@ pop.subpop.0.species.crossover-prob = 	0.75
 
 # ESTO NO SE MUY BIEN PARA QUE SON CADA COSA
 pop.subpop.0.species.pipe = 					ec.vector.breed.VectorMutationPipeline
-pop.subpop.0.species.pipe.likelihood        	= 0.75
+#pop.subpop.0.species.pipe.likelihood        	= 1.00
 pop.subpop.0.species.pipe.source.0 =            ec.vector.breed.VectorCrossoverPipeline
-pop.subpop.0.species.pipe.source.0.likelihood 	= 0.75
+#pop.subpop.0.species.pipe.source.0.likelihood 	= 1.00
 pop.subpop.0.species.pipe.source.0.source.0 =	ec.select.TournamentSelection
 pop.subpop.0.species.pipe.source.0.source.1 = 	same
 pop.subpop.0.species.pipe.source.0.source.1.size = 1
