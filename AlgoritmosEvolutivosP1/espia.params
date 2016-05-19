@@ -17,8 +17,10 @@ stat.do-message=		false
 stat.do-description=	true
 
 # ARCHIVOS DE ENTRADA Y SALIDA DEL PROGRAMA
-eval.problem.in_matriz = espia_matriz
-eval.problem.in_temporadas = espia_temporadas
+#eval.problem.in_matriz = espia_matriz
+#eval.problem.in_temporadas = espia_temporadas
+eval.problem.in_matriz = problema_matriz
+eval.problem.in_temporadas = problema_temporadas
 
 
 # ESTOS VIENEN POR DEFECTO
